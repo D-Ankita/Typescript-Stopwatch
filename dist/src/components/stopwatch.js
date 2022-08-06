@@ -93,6 +93,7 @@ class StopWatch {
     }
     render() {
         const stopWatchContainer = document.createElement("div");
+        const header = document.createElement("h1");
         const container = document.createElement("div");
         const displayUnitContainer = document.createElement("div");
         const hoursPara = document.createElement("p");
@@ -110,6 +111,7 @@ class StopWatch {
         stopBtn.disabled = true;
         //class
         stopWatchContainer.classList.add("timerContainer");
+        header.classList.add("heading");
         container.classList.add("timer");
         displayUnitContainer.classList.add("displayUnit");
         buttonsContainer.classList.add("buttonsContainer");
@@ -118,6 +120,7 @@ class StopWatch {
         pauseBtn.classList.add("pauseBtn");
         stopBtn.classList.add("stopBtn");
         //innertext
+        header.innerText = "Stop Watch";
         hoursPara.innerText = "0 : 0 : 0";
         startBtn.innerText = "Start";
         pauseBtn.innerText = "Pause";
@@ -133,6 +136,7 @@ class StopWatch {
         displayUnitContainer.appendChild(hoursPara);
         container.appendChild(displayUnitContainer);
         container.appendChild(buttonsContainer);
+        // stopWatchContainer.appendChild(header)
         stopWatchContainer.appendChild(container);
         return stopWatchContainer;
     }
