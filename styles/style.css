@@ -1,0 +1,67 @@
+/* 
+<div class="timerContainer">
+            <div class="displayUnit">
+                <p class="hours">00</p>
+                <p>:</p>
+                <p class="mins">00</p>
+                <p>:</p>
+                <p class="secs">00</p>
+            </div>
+            <div class="buttonsContainer">
+                <button class="startBtn"></button>
+                <button class="pauseBtn"></button>
+                <button class="stopBtn"></button>
+            </div>
+        </div>
+         */
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 62.5%;
+}
+
+.timerContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: #866;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.displayUnit {
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid blue; */
+    font-size: 5rem;
+}
+.buttonsContainer{
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
+
+}
+
+button{
+    width: 5rem;
+    height: 2rem;
+    margin: 0px 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@media(max-width: 600px) {
+    .displayUnit {
+        font-size: 3rem;
+    }
+}
