@@ -7,19 +7,51 @@ class StopWatch{
     constructor(){
         this.totalSeconds = 0
     }
-    displayTimer(){
+    displayTimer=()=>{
         //its work is to increment the seconds.
         this.totalSeconds+=1;
         //convert the total seconds in HH MM SS
+        // console.log(this);     
         const convertedTime = this.convertDisplayTime(this.totalSeconds);
+        // console.log(convertedTime);
+        
         //display on DOM
         let timerText = document.getElementById("hoursText") as HTMLElement;
-        timerText.innerText = convertedTime
+        timerText.innerText = convertedTime;
+    }
+    displayTime(){
+        //its work is to increment the seconds.
+        this.totalSeconds+=1;
+        //convert the total seconds in HH MM SS
+        console.log(this);    /** ES5 o/p: Window {window: Window, self: Window, document: document, name: '', location: Location, … */
+        /**
+         * Converted to ES6 function :  bcoz of this --> giving error as function stopwatch ka h but was finding in window.
+         * in ES6 :console.log(this); : o/p
+         * StopWatch {totalSeconds: 1, intervalId: 1, displayTimer: ƒ}
+            displayTimer: () => {…}
+            intervalId: 1
+            totalSeconds: 1
+            [[Prototype]]: Object
+         * 
+         */
+        const convertedTime = this.convertDisplayTime(this.totalSeconds);
+        // console.log(convertedTime);
+        
+        //display on DOM
+        let timerText = document.getElementById("hoursText") as HTMLElement;
+        timerText.innerText = convertedTime;
     }
 
     startTimer(){
         this.intervalId = setInterval(this.displayTimer, 1000);
-        console.log("clicked strt",this.intervalId);
+        let pauseBtn = document.getElementById("pauseResume") as HTMLButtonElement;
+        pauseBtn.disabled = false ;
+        let startBtn = document.getElementById("startButton") as HTMLButtonElement;
+        startBtn.disabled = true;
+        let stopButton = document.getElementById("stopButton") as HTMLButtonElement;
+        stopButton.disabled = false;
+
+        // console.log("clicked strt",this.intervalId);
     }
     pauseTimer(){
         //pause if running & resume if paused.
@@ -29,11 +61,15 @@ class StopWatch{
             clearInterval(this.intervalId);
             //make it null 
             this.intervalId =null;
-            console.log("PAUSED");
+            console.log("PASUED");
+            let pauseBtn = document.getElementById("pauseResume") as HTMLElement;
+            pauseBtn.innerText = "Resume";
         }
         else{
             this.intervalId = setInterval(this.displayTimer, 1000);
             console.log("RESUMED"); 
+            let resumeBtn = document.getElementById("pauseResume") as HTMLElement;
+            resumeBtn.innerText = "Pause";
         }
     }
 
@@ -43,11 +79,16 @@ class StopWatch{
             clearInterval(this.intervalId);
             //make it null 
             this.intervalId =null;
-            console.log("PAUSED");
+            console.log("STOPPED");
         }
         this.totalSeconds = -1;
-        this.displayTimer()
-
+        this.displayTimer();
+        let startBtn = document.getElementById("startButton") as HTMLButtonElement;
+        startBtn.disabled = false; 
+        let resumeBtn = document.getElementById("pauseResume") as HTMLButtonElement;
+        resumeBtn.disabled = true;
+        let stopButton = document.getElementById("stopButton") as HTMLButtonElement;
+        stopButton.disabled = true;
 
     }
     convertDisplayTime(seconds:number){
@@ -57,8 +98,8 @@ class StopWatch{
         hours =  Math.floor(seconds / 3600);
         mins = Math.floor((seconds - hours * 3600) / 60)
         secs = seconds- hours * 3600 - mins * 60;
-        const time = hours +":"+ mins +":"+ secs;
-        console.log(time);
+        const time = hours +" : "+ mins +" : "+ secs;
+        // console.log(time);
         return time;
     }
 
@@ -67,6 +108,7 @@ class StopWatch{
 
     render(){
         const stopWatchContainer =  document.createElement("div");
+        const container =  document.createElement("div");
         const displayUnitContainer = document.createElement("div");
         const hoursPara  = document.createElement("p");
         const buttonsContainer =  document.createElement("div");
@@ -75,11 +117,19 @@ class StopWatch{
         const stopBtn = document.createElement("button");
 
         //id
+        startBtn.id = "startButton"
         hoursPara.id = "hoursText"
+        pauseBtn.id = "pauseResume"
+        stopBtn.id = "stopButton"
+
+        //pause btn disabled
+        pauseBtn.disabled = true;
+        stopBtn.disabled = true;
 
 
         //class
         stopWatchContainer.classList.add("timerContainer");
+        container.classList.add("timer")
         displayUnitContainer.classList.add("displayUnit");
         buttonsContainer.classList.add("buttonsContainer")
         hoursPara.classList.add("hours");
@@ -88,15 +138,15 @@ class StopWatch{
         stopBtn.classList.add("stopBtn");
         
         //innertext
-        hoursPara.innerText = "00 : 00 : 00";
+        hoursPara.innerText = "0 : 0 : 0";
         startBtn.innerText = "Start";
         pauseBtn.innerText = "Pause";
         stopBtn.innerText = "Stop";
 
         //onclick
         startBtn.onclick = this.startTimer.bind(this)
-        pauseBtn.onclick = this.pauseTimer
-        stopBtn.onclick = this.stopTimer
+        pauseBtn.onclick = this.pauseTimer.bind(this)
+        stopBtn.onclick = this.stopTimer.bind(this)
 
 
 
@@ -105,8 +155,9 @@ class StopWatch{
         buttonsContainer.appendChild(pauseBtn)
         buttonsContainer.appendChild(stopBtn)
         displayUnitContainer.appendChild(hoursPara)
-        stopWatchContainer.appendChild(displayUnitContainer)
-        stopWatchContainer.appendChild(buttonsContainer)
+        container.appendChild(displayUnitContainer)
+        container.appendChild(buttonsContainer)
+        stopWatchContainer.appendChild(container)
 
         return stopWatchContainer
     }
