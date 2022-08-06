@@ -1,0 +1,58 @@
+pauseTimer(){
+        let timerP = document.getElementById("hoursPara")! as HTMLElement;
+        console.log(timerP);
+        console.log("in pause Timer Function");
+        this.isRunning = false;
+
+    
+    }
+
+    startTimer=()=>{
+        console.log("in start Timer Function");
+        this.isRunning = true;
+        if(this.isRunning == true){
+            this.isRunning = false;
+            console.log(this);
+            this.displayTimer()
+            console.log("in start Timer Function @ end");
+        }
+
+    }
+    stopTimer(){   
+        console.log("in stop Timer Function");
+        this.hours = 0;
+        this.min = 0;
+        this.sec = 0
+        if(this.isRunning = false){
+            this.isRunning = true
+        };
+        
+    }
+    displayTimer() {
+        //here this function should manipulate the DOM : ie. Change the hr , min , sec on screen
+        let timerP = document.getElementById("hoursText")! as HTMLElement;
+        console.log(timerP);
+        console.log("in Display Timer Function");
+        if(this.isRunning == false){
+
+            this.sec = this.sec + 1;
+
+            if(this.sec == 60){
+                this.min = this.min +1;
+                this.sec = 0;
+            }
+            if(this.min == 60){
+                this.hours = this.hours +1;
+                this.min = 0;
+            }
+            
+         }
+         //here this function should manipulate the DOM : ie. Change the hr , min , sec on screen -----some ERROR
+         timerP.innerText= `${this.hours} : ${this.min} : ${this.sec}`
+         setTimeout(this.displayTimer,1000)
+        console.log("in Display Timer Function 00");
+    }
+    resetTimer(){
+        let timerP = document.getElementById("hoursText") as HTMLElement;
+        timerP.innerText= `00 : 00 : 00`
+    }
