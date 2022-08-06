@@ -81,6 +81,27 @@ button:disabled{
 }
 
 @media(max-width: 600px) {
+    *{
+        padding: 0px;
+    }
+    body {
+        font-size: 30%;
+        
+    }
+    .timer{
+        padding: 0px 0px;
+    }
+    button{
+        width: 5rem;
+        height: 2rem;
+        margin: 0px 2px;
+        padding: 1px;
+        font-size: 1rem;
+    }
+    .buttonsContainer{
+        margin: 1rem;
+    
+    }
     .displayUnit {
         font-size: 3rem;
     }
