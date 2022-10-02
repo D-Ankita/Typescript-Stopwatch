@@ -16,6 +16,8 @@ Simply start the Stopwatch and begin your work
 
 once you complete the task, stop the stopwatch.
 
+<img width="419" alt="image" src="https://user-images.githubusercontent.com/46243069/193454090-d3d14f15-0b5b-4410-8a42-d2d646c76ca7.png">
+
 
 ## How to use
 one can directly start using the Application without any need to install by simply accessing the hosted link.
